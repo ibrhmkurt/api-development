@@ -30,4 +30,13 @@ class ItemController extends Controller
 
         return response()->json($item);
     }
+
+    public function update(Request $request, $id)
+    {
+        $data = $request->only('name', 'quantity', 'color', 'price', 'weight');
+        $item = Item::find($id);
+        $item->update($data);
+
+        return response()->json($item);
+    }
 }

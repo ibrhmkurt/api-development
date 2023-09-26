@@ -21,3 +21,4 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::get('items', [\App\Http\Controllers\Api\ItemController::class, 'index']);
 Route::get('item/{id}', [\App\Http\Controllers\Api\ItemController::class, 'show']);
 Route::post('item', [\App\Http\Controllers\Api\ItemController::class, 'store']);
+Route::put('item/{id}', [\App\Http\Controllers\Api\ItemController::class, 'update']);
