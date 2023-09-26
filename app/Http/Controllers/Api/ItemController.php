@@ -15,4 +15,11 @@ class ItemController extends Controller
 
         return response()->json($items);
     }
+
+    public function show($id)
+    {
+       $item = Item::find($id);
+
+       return response()->json($item);
+    }
 }
