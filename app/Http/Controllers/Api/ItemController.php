@@ -3,8 +3,10 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\ItemResource;
 use App\Models\Item;
 use Illuminate\Http\Request;
+use Illuminate\Support\ItemNotFoundException;
 
 class ItemController extends Controller
 {
@@ -13,14 +15,14 @@ class ItemController extends Controller
         $perPage = $request->get('perPage', 5);
         $items = Item::paginate($perPage);
 
-        return response()->json($items);
+        return ItemResource::collection($items);
     }
 
     public function show($id)
     {
        $item = Item::find($id);
 
-       return response()->json($item);
+       return ItemResource::make($item);
     }
 
     public function store(Request $request)
@@ -28,7 +30,7 @@ class ItemController extends Controller
         $data = $request->only('name', 'quantity', 'color', 'price', 'weight');
         $item = Item::create($data);
 
-        return response()->json($item);
+        return ItemResource::make($item);
     }
 
     public function update(Request $request, $id)
@@ -37,7 +39,7 @@ class ItemController extends Controller
         $item = Item::find($id);
         $item->update($data);
 
-        return response()->json($item);
+        return ItemResource::make($item);
     }
 
     public function destroy($id)
