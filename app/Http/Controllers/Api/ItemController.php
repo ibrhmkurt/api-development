@@ -49,4 +49,12 @@ class ItemController extends Controller
 
         return response()->json(['status' => 'successful deletion operation']);
     }
+
+    public function restore($id)
+    {
+        $item = Item::withTrashed()->find($id);
+        $item->restore();
+
+        return ItemResource::make($item);
+    }
 }
