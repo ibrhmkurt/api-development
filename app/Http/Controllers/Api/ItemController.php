@@ -22,4 +22,12 @@ class ItemController extends Controller
 
        return response()->json($item);
     }
+
+    public function store(Request $request)
+    {
+        $data = $request->only('name', 'quantity', 'color', 'price', 'weight');
+        $item = Item::create($data);
+
+        return response()->json($item);
+    }
 }
