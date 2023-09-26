@@ -39,4 +39,12 @@ class ItemController extends Controller
 
         return response()->json($item);
     }
+
+    public function destroy($id)
+    {
+        $item = Item::find($id);
+        $item->delete();
+
+        return response()->json(['status' => 'successful deletion operation']);
+    }
 }
